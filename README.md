@@ -19,7 +19,12 @@ Replace `<username>` and `XCBuildShorten` with your GitHub username and reposito
 ## Usage
 
 ```sh
-trim-xcode-build [path/to/build_log.txt]
-# or
-xcodebuild ... | trim-xcode-build
+# File processor mode (default): read from a saved log file
+trim-xcode-build [OPTIONS] [path/to/build_log.txt]
+
+# Pipe mode: read from stdin
+xcodebuild ... 2>&1 | trim-xcode-build [OPTIONS]
+
+# Wrapper mode: run xcodebuild and process its output
+trim-xcode-build xcodebuild [xcodebuild args...]
 ```
