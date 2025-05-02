@@ -26,7 +26,16 @@ perform_trim() {
      ctx[ctx_len] = ctx_line
      next
    }
-   # match compiler errors of form path:line:col: error
+  # xcodebuild invocation errors (non-compile errors)
+  /^xcodebuild: error:/ {
+    if (ignore_regex != "" && $0 ~ ignore_regex) next
+    # print xcodebuild error line
+    print $0
+    print ""
+    errors = 1
+    next
+  }
+  # match compiler errors of form path:line:col: error
    /^[^[:space:]].*:[0-9]+:[0-9]+:[[:space:]]*.*error:/ {
      if (ignore_regex != "" && $0 ~ ignore_regex) next
      # print buffered include-context, then clear
@@ -124,6 +133,7 @@ done
 # perform trimming on the specified input
 perform_trim "$infile"
 exit $?
+
 
 awk -v prefix="$prefix" \
      -v ignore_regex="$ignore_regex" \
