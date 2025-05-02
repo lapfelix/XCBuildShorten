@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run trim_xcode_build.sh tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Make scripts executable
+        run: |
+          chmod +x trim_xcode_build.sh
+          chmod +x tests/test_trim.sh
+
+      - name: Run tests
+        run: zsh tests/test_trim.sh
