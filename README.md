@@ -7,7 +7,7 @@ A simple shell script to extract error messages and code snippets from Xcode bui
 Install via a single curl command:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/<username>/XCBuildShorten/main/trim_xcode_build.sh \
+curl -fsSL https://raw.githubusercontent.com/lapfelix/XCBuildShorten/main/trim_xcode_build.sh \
   -o /usr/local/bin/trim-xcode-build \
   && chmod +x /usr/local/bin/trim-xcode-build
 ```
