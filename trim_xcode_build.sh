@@ -48,7 +48,7 @@ BEGIN { errors = 0; ctx_len = 0 }
   ctx[ctx_len] = ctx_line
   next
 }
-/error:/ {
+/^[^[:space:]].*:[0-9]+:[0-9]+:[[:space:]]*.*error:/ {
   if (ignore_regex != "" && $0 ~ ignore_regex) next
   # print buffered include-context, then clear
   for (i = 1; i <= ctx_len; i++) print ctx[i]
